@@ -10,16 +10,15 @@ void outputS(int *a, int row, int colum);
 
 int main() {
     int n, row, colum, **data, *dataI, dataS[LEN + LEN];
-    // printf("%d", (int)('\n'));
     if (inputN(&n, &row, &colum)) {
         switch (n) {
-            case 1: // статический
+            case 1:
                 if (inputArryS(dataS, row, colum)) {
                     outputS(dataS, row, colum);
                 } else {
                     printf("n/a");
                 } break;
-            case 2: // malloc 1
+            case 2:
                 data = (int **) malloc(row * sizeof(int*));
                 for (int i = 0; i < row; i++)
                     data[i] = (int*) malloc(colum * sizeof(int));
@@ -28,7 +27,7 @@ int main() {
                 } else {
                     printf("n/a");
                 } break;
-            case 3: // malloc 2
+            case 3:
                 data = (int **) malloc(row * colum * sizeof(int) + sizeof(int*));
                 dataI = (int*) (data + row);
                 for (int i = 0; i < row; i++)
@@ -38,7 +37,7 @@ int main() {
                 } else {
                     printf("n/a");
                 } break;
-            case 4: // malloc 3
+            case 4:
                 data = (int **) malloc(row * sizeof(int*));
                 dataI = (int*) malloc(row * colum * sizeof(int));
                 for (int i = 0; i < row; i++)
@@ -70,11 +69,10 @@ int inputN(int *n, int *row, int *colum) {
 }
 
 int inputArry(int **a, int row, int colum) {
-    for (int **p = a; p - a < row; p++) {
-        for (int *l = p[0]; l - p[0] < colum; l++) {
-            if (!scanf("%d", l)) return 0;
-            if ((int *) l  != l) return 0;
-            if (l - p[0] < (row * colum) - 1 && getchar() == 10) return 0;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < colum; j++) {
+            if (!scanf("%d", &a[i][j])) return 0;
+            if ((int) a[i][j]  != a[i][j]) return 0;
         }
         if (getchar() != 10) return 0;
     }
